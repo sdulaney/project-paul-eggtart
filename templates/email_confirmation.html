@@ -1,0 +1,13 @@
+<!-- Compiled and minified JavaScript -->
+<link rel="stylesheet" href="../static/sass/materialize.css">
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+
+{% block content %}
+<h1>Your account for Rate My TA was successfully created!</h1>
+<h1>Please click on the link below to confirm your email address and activate your account.</h1>
+<a href="{{ confirm_url }}">{{ confirm_url }}</a>
+{% endblock %}

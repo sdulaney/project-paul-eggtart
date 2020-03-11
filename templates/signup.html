@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="{{url_for('static', filename='css/signup.css')}}">
+
+{% set url = url_for("router.signup") %}
+<div class="signup-form">
+  <h2>Signup for an account</h2>
+  <form>
+    <input type="text" title="username" placeholder="username" />
+    <input type="password" title="username" placeholder="password" />
+    <button type="submit" class="btn">Login</button>
+    <a class="forgot" href="#">Forgot Username?</a>
+  </form>
+</div><!--end log form -->

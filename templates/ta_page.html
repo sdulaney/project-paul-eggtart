@@ -1,0 +1,149 @@
+<!-- Compiled and minified JavaScript -->
+<link rel="stylesheet" href="../static/sass/materialize.css">
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+
+
+{% extends "navigation-bar.html" %}
+{% block content %}
+
+<!-- List TA Information and Header -->
+<div class="col s12 m8 offset-m2 l6 offset-l3">
+	<div class="card-panel grey lighten-5 z-depth-1">
+		<div class="row valign-wrapper">
+
+			<!-- TA Portrait-->
+			<div class="col s2 offset-l3">
+				<img src={{ url_for('static', filename = "images/"+ ta_jpg) }} alt="" class="circle responsive-img">
+			</div>
+
+			<div class="col s10">
+				<div class="card">
+					<div class="card-image waves-effect waves-block waves-light"></div>
+					<!-- FLIP THE REVEAL / DON'T REVEAL CARDS -->
+					<!-- FIGURE OUT HOW TO HIDE BEHIND PAYWALL -->
+					<div class="card-content">
+						<span class="card-title activator grey-text text-darken-4">
+							{{ta_info[0]}}
+							<i class="material-icons right">lock_outline</i>
+						</span>
+						<h6>Ratings</h6>
+						<p>Clarity: {{ta_info[2][0]}}</p>
+						<p>Helpfulness: {{ta_info[2][1]}}</p>
+						<p>Availability: {{ta_info[2][2]}}</p>
+					</div>
+				</div>
+				<p>
+					<!-- CLASSES THE TA TEACHES !!! -->
+					Classes: 
+					{%for index in range( (ta_info[3] | length) ) %}
+						{{ ta_info[3][index] }}.
+					{%endfor%}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<h1 class="center-align"> Forum </h1>
+
+<!-- List each comment in the Forum -->
+{%for index in range( (ta_info[1] | length) ) %}
+
+<div class="row">
+	<div class="col s12 m6 offset-m3">
+		<div class="card grey lighten-3 ">
+			<!-- The Time -->
+			<div class="row">
+				<div class="card-title center-align">
+					<span>{{ ta_info[1][index][1] }}</span>
+				</div>
+			</div>
+
+			<!-- Actual Comment -->
+			<div class="card-content light-grey-text center-align">
+				<p>
+					{{ ta_info[1][index][0]}}
+				</p>
+			</div>
+
+			<!-- Upvote / Downvote -->
+			<div class="card-action center-align">
+			</div>
+		</div>
+	</div>
+</div>
+
+{%endfor%}
+
+
+
+<!-- Submit a comment to the Forum -->
+<form method="POST" action={{redirect}} role="form">
+	{{ comment_form.csrf_token }}
+	<div class="row">
+		<div class="col s12 m6 offset-m3">
+			<div class="card grey lighten-3 ">
+				<div class="card-content">
+					<span class="card-title black-text">Comment On Your TA</span>
+					<form>
+						<div class="row">
+							<div class="input-field col s12">
+
+								{{ comment_form.comment }}
+
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="card-action">
+					<button class="btn waves-effect waves-light blue darken-1" type="submit"
+						name="action">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<!-- Submit a rating for the TA -->
+<form method="POST" action={{redirect}} role="form">
+	{{ rating_form.csrf_token }}
+	<div class="row">
+		<div class="col s12 m6 offset-m3">
+			<div class="card grey lighten-3 ">
+				<div class="card-content">
+					<span class="card-title black-text">Rate Your TA</span>
+					<form>
+						<div class="row">
+							<p class="range-field">
+								<h6> {{ rating_form.clarity.name }} </h6>
+								<input name="clarity" type="range" min="1" max="5" />
+								<h6> {{ rating_form.helpfulness.name }} </h6>
+								<input name="helpfulness" type="range" min="1" max="5" />
+								<h6> {{ rating_form.availability.name }} </h6>
+								<input name="availability" type="range" min="1" max="5" />
+							</p>
+						</div>
+						<div class="row">
+							<p class="left">Low</p>
+							<p class="right">High</p>
+						</div>
+					</form>
+				</div>
+				<div class="card-action">
+					<button class="btn waves-effect waves-light blue darken-1" type="submit"
+						name="action">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+<head>
+    <!-- Compiled and minified JavaScript -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {# <script type="text/javascript">      
+    </script> #}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <script src="{{url_for('static', filename='js/login_form.js')}}"></script>
+</head>
+
+
+
+<nav>
+  <div class="nav-wrapper blue darken-1"><a href="/" class="brand-logo" style="padding-left: 80px;">ratemyTA</a></div>
+</nav>
+{% extends "base.html" %}
+{% block content %}
+
+<div class="wrapper">
+    <div class="form white">
+      
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1 >Sign Up for Free</h1>
+          
+          <form action="{{ url_for('router.signup') }}" method="POST" role="form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="top-row">
+              <div class="field-wrap">
+                <label>
+                  First Name<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" name="first_name"/>
+              </div>
+          
+              <div class="field-wrap">
+                <label>
+                  Last Name<span class="req">*</span>
+                </label>
+                <input type="text"required autocomplete="off" name="last_name"/>
+              </div>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                UCLA Email Address<span class="req">*</span>
+              </label>
+              <input type="email"required autocomplete="off" name="email_addr"/>
+            </div>
+            
+            <div class="field-wrap">
+              <label>
+                Set A Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off" name="password"/>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                Retype Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off" name="retype_password"/>
+            </div>
+            
+            <button type="submit" class="button button-block" name="action"/>Get Started</button>
+          
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          <h1>Welcome Back!</h1>
+          
+          <form action="{{ url_for('router.login') }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="text" name="email" />
+            <!-- <input type="email"required autocomplete="off"/> -->
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" name="password" />
+            <!-- <input type="password"required autocomplete="off"/> -->
+          </div>
+          
+          <p class="forgot"><a href="/reauthenticate">Re-Authenticate Me</a></p>
+          <p class="forgot"><a href="/reset_password">Forgot Password?</a></p>
+          
+          <button class="button button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+        
+      </div><!-- tab-content -->  
+    </div> <!-- /form -->
+</div>
+
+
+
+
+
+{% endblock %}

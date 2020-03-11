@@ -1,0 +1,23 @@
+<!-- Compiled and minified JavaScript -->
+<link rel="stylesheet" href="../static/sass/materialize.css">
+<!-- Compiled and minified JavaScript -->
+<script nonce="{{ csp_nonce() }}" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="{{ url }}/profile">Profile</a></li>
+  <li><a href="/logout">Logout</a></li>
+</ul>
+<nav>
+
+  <div class="nav-wrapper light-blue"><a href="/search" style="padding-left: 80px;" class="brand-logo">ratemyTA</a>
+    <ul id="nav-mobile" class="right">
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Account<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+{% extends "base.html" %}
+{% block content %}
+{% endblock %}

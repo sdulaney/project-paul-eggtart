@@ -1,0 +1,79 @@
+<!-- Compiled and minified JavaScript -->
+<link rel="stylesheet" href="../static/sass/materialize.css">
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+
+{% extends "navigation-bar.html" %}
+{% block content %}
+
+{% set url = url_for("router.profile") %}
+<div class="col s12 m8 l6">
+	<div class="card-panel grey lighten-5 z-depth-1">
+		<div class="row valign-wrapper">
+			<div class="col s10">
+				<div class="card">
+                    <table class="table table-responsive">
+                        <tr>
+                            <div class="col s5">
+                                <th>First Name</th>
+                                <td>{{ user.first_name }}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="col s5">
+                                <th>Last Name</th>
+                                <td>{{ user.last_name }}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="col s5">
+                                <th>Email</th>
+                                <td>{{ user.email }}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="col s5">
+                                <th>Next Password Reset Date</th>
+                                <td>{{ user.password_reset }}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="col s5">
+                                <th>Remaining Views</th>
+                                <td>{{ user.remaining_views }}</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div class="col s5">
+                                <th>Viewable TAs</th>
+                                <td>
+                                    <ul>
+                                        {% for u in ta_list %}
+                                            {% if u != "placeholder" %}
+                                                <li><a href="/TA/{{ u }}">{{ u }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    <ul>
+                                </td>
+                            </div>
+                        </tr>
+                    </table>
+				</div>
+                <div class="box-footer">
+                    <a href="{{ url }}/edit?id={{ user.id }}">
+                        <button class="btn btn-info pull-right">edit</button>
+                    </a>
+                    <a href="{{ url_for("router.verify_card") }}">
+                        <button class="btn btn-info pull-right">Purchase Credits</button>
+                    </a>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
